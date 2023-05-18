@@ -231,7 +231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731569360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1.5, z: 0}
+  m_LocalPosition: {x: 10, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -722,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996290819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -1, z: 0}
+  m_LocalPosition: {x: 10, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -774,8 +774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 982cc355e417f9d47abe7d6401a7b5fb, type: 2}
-  delay: 3
-  interval: 0.6
+  delay: 8
+  interval: 0.71
   prefabUp: {fileID: 5430569023919340723, guid: a6ff2a023b04b6d46b0a77d457e75b54, type: 3}
   prefabDown: {fileID: 3414389641268282969, guid: cd01aa92efa5f364a9da29306f4903b5, type: 3}
   prefabObstacle: {fileID: 1972389913318725207, guid: 627add8adeb4a634b885d0efefa66180, type: 3}
