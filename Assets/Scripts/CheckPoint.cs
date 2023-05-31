@@ -15,6 +15,8 @@ public class CheckPoint : MonoBehaviour
     private TextMeshProUGUI textScore;
     [SerializeField, Header("連擊")]
     private TextMeshProUGUI textCombo;
+    [SerializeField, Header("顯示打擊狀態物件")]
+    private Animator aniShowState;
 
     private int scoreTotal, scorePerfect = 100, scoreGood = 50;
     private int combo;
@@ -40,21 +42,33 @@ public class CheckPoint : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeMiss);
 
+        if (hit == null) return;
+
         Vector2 pointHit = hit.transform.position;
         float distance = Vector2.Distance(transform.position, pointHit);
+        Animator aniHit = hit.GetComponent<Animator>();
 
         if (distance <= rangePerfect)
         {
             ComboAndScore(scorePerfect);
+            aniHit.SetTrigger("Perfect");
+            aniShowState.SetTrigger("Perfect");
         }
         else if (distance <= rangeGood)
         {
             ComboAndScore(scoreGood);
+            aniHit.SetTrigger("Good");
+            aniShowState.SetTrigger("Good");
         }
         else
         {
             combo = 0;
+            textCombo.text = $"連擊：0";
+            aniHit.SetTrigger("Miss");
+            aniShowState.SetTrigger("Miss");
         }
+
+        hit.GetComponent<Collider2D>().enabled = false;
     }
 
     private void ComboAndScore(int score)
