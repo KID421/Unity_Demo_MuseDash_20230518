@@ -839,7 +839,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &810271675
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -856,8 +856,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &920500484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1594,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &1628124683
 Animator:
-  serializedVersion: 5
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1612,8 +1611,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1628124684
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1876,6 +1874,8 @@ MonoBehaviour:
   textScore: {fileID: 486081477}
   textCombo: {fileID: 335379605}
   aniShowState: {fileID: 810271675}
+  destroyAreaSize: {x: 0.3, y: 5, z: 1}
+  destroyAreaOffset: {x: -2.2, y: 0, z: 0}
 --- !u!1 &1783879617
 GameObject:
   m_ObjectHideFlags: 0

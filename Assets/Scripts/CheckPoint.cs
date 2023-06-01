@@ -17,6 +17,11 @@ public class CheckPoint : MonoBehaviour
     private TextMeshProUGUI textCombo;
     [SerializeField, Header("顯示打擊狀態物件")]
     private Animator aniShowState;
+    [Header("刪除區域資料")]
+    [SerializeField]
+    private Vector3 destroyAreaSize = Vector3.one;
+    [SerializeField]
+    private Vector3 destroyAreaOffset;
 
     private int scoreTotal, scorePerfect = 100, scoreGood = 50;
     private int combo;
@@ -31,11 +36,15 @@ public class CheckPoint : MonoBehaviour
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, rangeMiss);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(transform.position + destroyAreaOffset, destroyAreaSize);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(key)) ClickAndCheckPoint();
+        CheckObjectInDestroyArea();
     }
 
     private void ClickAndCheckPoint()
@@ -69,6 +78,18 @@ public class CheckPoint : MonoBehaviour
         }
 
         hit.GetComponent<Collider2D>().enabled = false;
+    }
+
+    private void CheckObjectInDestroyArea()
+    {
+        Collider2D hit = Physics2D.OverlapBox(transform.position + destroyAreaOffset, destroyAreaSize, 0);
+
+        if (hit)
+        {
+            hit.GetComponent<Animator>().SetTrigger("Miss");
+            hit.GetComponent<Collider2D>().enabled = false;
+            Destroy(hit.gameObject, 0.5f);                         // 逗號後面為延遲刪除的秒數
+        }
     }
 
     private void ComboAndScore(int score)
