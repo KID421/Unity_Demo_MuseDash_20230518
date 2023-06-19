@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
+    #region 資料
     [SerializeField, Header("Perfect 範圍"), Range(0, 10)]
     private float rangePerfect = 1;
     [SerializeField, Header("Good 範圍"), Range(0, 10)]
@@ -24,7 +27,8 @@ public class CheckPoint : MonoBehaviour
     private Vector3 destroyAreaOffset;
 
     private int scoreTotal, scorePerfect = 100, scoreGood = 50;
-    private int combo;
+    private int combo; 
+    #endregion
 
     private void OnDrawGizmos()
     {
@@ -47,12 +51,22 @@ public class CheckPoint : MonoBehaviour
         CheckObjectInDestroyArea();
     }
 
+    [SerializeField]
+    private Transform player;
+    [SerializeField]
+    private List<Collider2D> goHits = new List<Collider2D>();
+
     private void ClickAndCheckPoint()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeMiss);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, rangeMiss);
 
-        if (hit == null) return;
+        if (hits.Length == 0) return;
 
+        goHits = hits.ToList();
+        goHits = goHits.OrderBy(x => Vector2.Distance(x.transform.position, player.position)).ToList(); 
+        Collider2D hit = goHits[0];
+
+        #region 判定分數
         Vector2 pointHit = hit.transform.position;
         float distance = Vector2.Distance(transform.position, pointHit);
         Animator aniHit = hit.GetComponent<Animator>();
@@ -75,9 +89,12 @@ public class CheckPoint : MonoBehaviour
             textCombo.text = $"連擊：0";
             aniHit.SetTrigger("Miss");
             aniShowState.SetTrigger("Miss");
-        }
+        } 
+        #endregion
 
         hit.GetComponent<Collider2D>().enabled = false;
+
+        Destroy(hit.gameObject);
     }
 
     private void CheckObjectInDestroyArea()
