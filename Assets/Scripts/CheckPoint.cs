@@ -27,8 +27,16 @@ public class CheckPoint : MonoBehaviour
     private Vector3 destroyAreaOffset;
 
     private int scoreTotal, scorePerfect = 100, scoreGood = 50;
-    private int combo; 
+    private int combo;
     #endregion
+
+    int hp = 3;
+
+    private void Dead()
+    {
+        hp--;
+        if (hp == 0) GameManager.instance.GameOver();
+    }
 
     private void OnDrawGizmos()
     {

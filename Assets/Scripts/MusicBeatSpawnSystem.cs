@@ -45,6 +45,8 @@ namespace KID
                 indexMusicBeat = 0;
                 indexSection++;
             }
+
+            if (indexSection == section.Length) CancelInvoke("SpawnMusicBeat");
         }
 
         /// <summary>
